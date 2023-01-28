@@ -18,10 +18,11 @@ namespace Discount.Grpc
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGrpc();
-            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IDiscountRepository, DiscountRepository>();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddGrpc();
         }
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -35,7 +36,7 @@ namespace Discount.Grpc
 
             app.UseEndpoints(endpoints =>
             {
-               endpoints.MapGrpcService<DiscountService>();
+                endpoints.MapGrpcService<DiscountService>();
 
                 endpoints.MapGet("/", async context =>
                 {
@@ -43,5 +44,5 @@ namespace Discount.Grpc
                 });
             });
         }
-    }
+    } 
 }
